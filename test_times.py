@@ -1,4 +1,5 @@
 from times import time_range, compute_overlap_time
+import pytest
 
 def test_given_input():
     
@@ -40,3 +41,9 @@ def test_touching_boundaries_has_no_overlap():
     r1 = time_range("2020-01-01 00:00:00", "2020-01-01 01:00:00")
     r2 = time_range("2020-01-01 01:00:00", "2020-01-01 02:00:00")
     assert compute_overlap_time(r1, r2) == []
+
+
+
+def test_time_range_backwards_raises_error():
+    with pytest.raises(ValueError, match="must be after"):
+        time_range("2020-01-01 10:00:00", "2020-01-01 09:00:00")
