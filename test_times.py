@@ -13,3 +13,30 @@ def test_given_input():
     ]
 
     assert result == expected
+
+
+
+def test_no_overlap():
+    r1 = time_range("2020-01-01 00:00:00", "2020-01-01 01:00:00")
+    r2 = time_range("2020-01-01 02:00:00", "2020-01-01 03:00:00")
+    assert compute_overlap_time(r1, r2) == []
+
+
+
+def test_multiple_intervals_overlap():
+    # r1: 10:00-12:00  → [10:00,11:00], [11:00,12:00]
+    r1 = time_range("2010-01-12 10:00:00", "2010-01-12 12:00:00", 2)
+    # r2: 10:30-11:30  → [10:30,11:00], [11:00,11:30]
+    r2 = time_range("2010-01-12 10:30:00", "2010-01-12 11:30:00", 2)
+    result = compute_overlap_time(r1, r2)
+    expected = [
+        ("2010-01-12 10:30:00", "2010-01-12 11:00:00"),
+        ("2010-01-12 11:00:00", "2010-01-12 11:30:00"),
+    ]
+    assert result == expected
+
+
+def test_touching_boundaries_has_no_overlap():
+    r1 = time_range("2020-01-01 00:00:00", "2020-01-01 01:00:00")
+    r2 = time_range("2020-01-01 01:00:00", "2020-01-01 02:00:00")
+    assert compute_overlap_time(r1, r2) == []
