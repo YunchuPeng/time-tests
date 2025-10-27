@@ -21,10 +21,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           # FIXME Is there anything else that needs to be installed?
-<<<<<<< HEAD
           pip install pytest
-=======
->>>>>>> 5c28c01 (Add GitHub Actions CI workflow to run pytest. Answers UCL-COMP0233-25-26/RSE-Classwork#17)
       - name: Test with pytest
         run: |
           pytest
