@@ -22,6 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           # FIXME Is there anything else that needs to be installed?
           pip install pytest
+          pip install pytest pyyaml
       - name: Test with pytest
         run: |
           pytest
